@@ -72,10 +72,10 @@ module.exports = {
       upload: file => {
         return new Promise((resolve, reject) => {
           // upload file on S3 bucket
-          const path = file.path ? `${file.path}/` : '';
+          const path = file.path ? `${file.path}/` : `${file.hash}/`;
           S3.upload(
             {
-              Key: `${path}${file.hash}${file.ext}`,
+              Key: `${path}${file.name}`,
               Body: new Buffer(file.buffer, 'binary'),
               ACL: 'public-read',
               ContentType: file.mime,
